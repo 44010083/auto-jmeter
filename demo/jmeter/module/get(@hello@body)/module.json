@@ -1,0 +1,1 @@
+{"stress":1,"requestHeaders":[{"v":"","n":""}],"previous":"","in":[{"t":"body","v":"JSONObject","n":"vo"}],"smoke":false,"assertions":[{"t":"8","v":"200","n":"Assertion.response_code"}],"forth":"","out":""}

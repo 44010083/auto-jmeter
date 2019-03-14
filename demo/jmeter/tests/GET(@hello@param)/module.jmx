@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935"> 
+  <hashTree> 
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true"> 
+      <stringProp name="TestPlan.comments"/>  
+      <boolProp name="TestPlan.functional_mode">false</boolProp>  
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>  
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true"> 
+        <collectionProp name="Arguments.arguments"/> 
+      </elementProp>  
+      <stringProp name="TestPlan.user_define_classpath"/> 
+    </TestPlan>  
+    <hashTree> 
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true"> 
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true"> 
+          <boolProp name="LoopController.continue_forever">false</boolProp>  
+          <stringProp name="LoopController.loops">1</stringProp> 
+        </elementProp>  
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>  
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>  
+        <longProp name="ThreadGroup.start_time">1281132211000</longProp>  
+        <longProp name="ThreadGroup.end_time">1281132211000</longProp>  
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>  
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>  
+        <stringProp name="ThreadGroup.duration"/>  
+        <stringProp name="ThreadGroup.delay"/> 
+      </ThreadGroup>  
+      <hashTree> 
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true"> 
+          <collectionProp name="CookieManager.cookies"/>  
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>  
+          <stringProp name="CookieManager.policy">rfc2109</stringProp> 
+        </CookieManager>  
+        <hashTree/>  
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true"> 
+          <collectionProp name="Arguments.arguments"> 
+            <elementProp name="VIEWSTATE" elementType="Argument"> 
+              <stringProp name="Argument.name">VIEWSTATE</stringProp>  
+              <stringProp name="Argument.value"/>  
+              <stringProp name="Argument.metadata">=</stringProp> 
+            </elementProp>  
+            <elementProp name="jsessionid" elementType="Argument"> 
+              <stringProp name="Argument.name">jsessionid</stringProp>  
+              <stringProp name="Argument.value"/>  
+              <stringProp name="Argument.metadata">=</stringProp> 
+            </elementProp> 
+          </collectionProp> 
+        </Arguments>  
+        <hashTree/>  
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true"> 
+          <collectionProp name="HeaderManager.headers"> 
+            <elementProp name="" elementType="Header"> 
+              <stringProp name="Header.name">User-Agent</stringProp>  
+              <stringProp name="Header.value">Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko</stringProp> 
+            </elementProp>  
+            <elementProp name="" elementType="Header"> 
+              <stringProp name="Header.name">Accept</stringProp>  
+              <stringProp name="Header.value">image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, */*</stringProp> 
+            </elementProp>  
+            <elementProp name="" elementType="Header"> 
+              <stringProp name="Header.name">Accept-Language</stringProp>  
+              <stringProp name="Header.value">zh-CN</stringProp> 
+            </elementProp> 
+          </collectionProp> 
+        </HeaderManager>  
+        <hashTree/>  
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" enabled="true" testname="/hello/param_module">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp elementType="HTTPArgument" name="vo">
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">vo</stringProp>
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">haha</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
+          <stringProp name="HTTPSampler.port">80</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/hello/param</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.implementation">java</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="requestHeaders" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp elementType="Header" name="">
+                <stringProp name="Header.name"></stringProp>
+                <stringProp name="Header.value"></stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="assertion_285377351" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="200">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"/>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree> 
+    </hashTree> 
+  </hashTree> 
+</jmeterTestPlan>
