@@ -156,7 +156,7 @@ public class JmeterHttpSamplerProxyUtil {
         //<stringProp name="HTTPSampler.implementation"></stringProp>
         Element stringProp_7 = httpSamplerProxy.addElement("stringProp");
         stringProp_7.addAttribute("name", "HTTPSampler.implementation");
-        stringProp_7.setText("java");
+        stringProp_7.setText("Java");
 
         //<stringProp name="HTTPSampler.connect_timeout"></stringProp>
         Element stringProp_8 = httpSamplerProxy.addElement("stringProp");
