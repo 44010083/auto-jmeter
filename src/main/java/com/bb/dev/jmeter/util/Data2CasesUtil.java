@@ -93,7 +93,7 @@ public class Data2CasesUtil {
                 //是否筛选为冒烟测试用例，true表示筛选为冒烟测试用例
                 jmxCase.setSmoke(fileJson.getBoolean("smoke"));
                 //唯一化ID
-                jmxCase.setId(jmxCase.getPath() + "_" + ffName.substring(0, ffName.length() - 5));
+                jmxCase.setId(jmxCase.getMethod() + "_" + jmxCase.getPath() + "_" + ffName.substring(0, ffName.length() - 5));
                 //用例名称
                 jmxCase.setName(ffName.substring(0, ffName.length() - 5));
 

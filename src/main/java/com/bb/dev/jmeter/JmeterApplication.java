@@ -5,23 +5,26 @@ import com.alibaba.fastjson.JSONObject;
 import com.bb.dev.jmeter.util.Data2CasesUtil;
 import com.bb.dev.jmeter.util.Data2FilesUtil;
 import com.bb.dev.jmeter.util.Data4JmeterUtil;
+import com.bb.dev.jmeter.util.Swagger4JmeterUtil;
 
 import java.io.File;
+import java.io.IOException;
 
 public class JmeterApplication {
     /*
-        功能：定义执行输入参数模式，只支持2种模式
+        功能：定义执行输入参数，有如下方式
                 java -jar jmeter-center.jar ut2jmx $utRoot $jmeterRoot
+                java -jar jmeter-center.jar swagger2jmx $swaggerFile $jmeterRoot
                 java -jar jmeter-center.jar data2file $jmeterRoot $baseWebUrl $reWrite
 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         boolean err = false;
         //首先对输入参数的个数进行识别，只能输入3个或者4个参数
         if (args.length != 3 && args.length != 4) {
             err = true;
 
-            //当输入3个参数的时候，第一个参数必须是ut2jmx
+            //当输入3个参数的时候，第一个参数是ut2jmx
         } else if (args.length == 3 && "ut2jmx".equalsIgnoreCase(args[0])) {
             //当输入3个参数的时候，第2个参数表示路径且必须存在
             if (new File(args[1]).exists()) {
@@ -29,6 +32,17 @@ public class JmeterApplication {
                 Data4JmeterUtil.getAllJmxData(args[1], args[2]);
             } else {
                 System.out.println("输入参数utRoot路径不存在");
+                err = true;
+            }
+            //当输入3个参数的时候，第一个参数是swagger2jmx
+        } else if (args.length == 3 && "swagger2jmx".equalsIgnoreCase(args[0])) {
+            //当输入3个参数的时候，第2个参数表示路径且必须存在
+            File swaggerFile = new File(args[1]);
+            if (swaggerFile.exists() && swaggerFile.isFile()) {
+                System.out.println("从swagger格式的API定义文件$swaggerFile转换测试数据给jmeter用");
+                Swagger4JmeterUtil.getAllJmxData(swaggerFile, args[2]);
+            } else {
+                System.out.println("输入参数$swaggerFile文件不存在");
                 err = true;
             }
 
@@ -66,16 +80,20 @@ public class JmeterApplication {
             err = true;
         }
         if (err) {
-            System.out.println("请正确输入参数，支持2种模式：");
-            System.out.println("\t模式1：");
+            System.out.println("请正确输入参数，支持：");
+            System.out.println("\t1：");
             System.out.println("\t\t从ut测试数据utRoot转换测试数据给jmeter用，存放到jmeterRoot路径");
             System.out.println("\t\t命令格式java -jar jmeter-center.jar ut2jmx $utRoot $jmeterRoot");
-            System.out.println("\t模式2：");
+            System.out.println("\t2：");
+            System.out.println("\t\t从swagger格式的API定义文件$swaggerFile转换测试数据给jmeter用，存放到jmeterRoot路径");
+            System.out.println("\t\t命令格式java -jar jmeter-center.jar swagger2jmx $swaggerFile $jmeterRoot");
+            System.out.println("\t3：");
             System.out.println("\t\t将data数据转化为jmx格式用例文件");
             System.out.println("\t\t参数：jmeterRoot，测试数据和测试用例文件的存放路径");
             System.out.println("\t\t参数：baseWebUrl，接口服务部署实例的地址");
             System.out.println("\t\t参数：reWrite，遇到同名测试用例文件是否覆盖");
             System.out.println("\t\t命令格式java -jar jmeter-center.jar data2file $jmeterRoot $baseWebUrl $reWrite");
+
         }
     }
 }

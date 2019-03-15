@@ -32,7 +32,7 @@ public class JmeterHttpSamplerProxyUtil {
 
         for (ArgsModel arg : jmeterCase.getArgs()) {
 
-            if ("var".equalsIgnoreCase(arg.getT()) && path.contains("{" + arg.getN() + "}")) {
+            if (("var".equalsIgnoreCase(arg.getT()) || "path".equalsIgnoreCase(arg.getT())) && path.contains("{" + arg.getN() + "}")) {
                 path = path.replace("{" + arg.getN() + "}", arg.getV());
             } else {
                 Element argElementProp = collectionProp.addElement("elementProp");
