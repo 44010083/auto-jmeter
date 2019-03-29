@@ -25,13 +25,26 @@ public class Swagger4JmeterUtil {
 
         String jmxModulePath = jmxRoot + "/module";
         String swaggerStr = FileUtils.readFileToString(swaggerFile);
+
         JSONObject swaggerJson = JSONObject.parseObject(swaggerStr);
         JSONObject paths = swaggerJson.getJSONObject("paths");
         for (Map.Entry<String, Object> path : paths.entrySet()) {
+
             String pathName = path.getKey();
             JSONObject pathApis = JSONObject.parseObject(path.getValue().toString());
             for (Map.Entry<String, Object> api : pathApis.entrySet()) {
-                saveApiModuleFile(pathName, api, jmxModulePath);
+                JSONArray parameters = new JSONArray();
+                try {
+                    parameters = pathApis.getJSONArray("parameters");
+                } catch (Exception e) {
+
+                }
+
+                if (!"parameters".equalsIgnoreCase(api.getKey())) {
+
+                    saveApiModuleFile(pathName, api, jmxModulePath, parameters);
+                }
+
             }
         }
 
@@ -44,7 +57,7 @@ public class Swagger4JmeterUtil {
             Map.Entry<String, Object> api       API定义
             String modulePath                   输出模板文件的存放路径
      */
-    private static void saveApiModuleFile(String pathName, Map.Entry<String, Object> api, String modulePath) throws IOException {
+    private static void saveApiModuleFile(String pathName, Map.Entry<String, Object> api, String modulePath, JSONArray parameters) throws IOException {
         String apiType = api.getKey();
         JSONObject apiJson = JSONObject.parseObject(api.getValue().toString());
         String moduleFile = modulePath + "/" + apiType + "(" + pathName.replaceAll("/", "@") + ")/module.json";
@@ -54,6 +67,8 @@ public class Swagger4JmeterUtil {
         JSONObject module = JSONObject.parseObject(moduleStr);
         if (apiJson.get("parameters") != null) {
             module.put("in", getApiInput(apiJson.getJSONArray("parameters")));
+        } else if (parameters != null) {
+            module.put("in", getApiInput(parameters));
         }
         File file = new File(moduleFile);
         if (!file.getParentFile().exists()) {

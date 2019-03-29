@@ -9,6 +9,7 @@
 /bin/
 /out/
 /dist/
+/target/
 /node_modules/
 *.sublime*
 npm-debug.log*
