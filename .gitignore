@@ -13,7 +13,8 @@
 /node_modules/
 *.sublime*
 npm-debug.log*
-/demo/
+**/module/*
+**/data/*
 
 
 #vscode
